@@ -23,8 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// 쿠키는 동일 출처 방식이여서 동일한 url이어야 서버와 쿠키를 주고 받을 수 있다.
+		// httpOnly 가 있는데 자바스크립트로 보내는걸 막고 http통신만 허용하겠다는건데 자바스크립트에 쿠키를 심어서 보낼 수 있어서 httpOnly 를 true 로 한다.
 		http
-				.addFilter(corsConfig.corsFilter())
+				.addFilter(corsConfig.corsFilter()) // 컨트롤러 단에 @CrossOrigin을 해주는건 인증이 없을때이고 인증이 필요할땐 시큐리티 필터에 등록한다.
 				.csrf().disable() //csrf방지
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 브라우저에 쿠키와 세션을 저장하지 않겠다
 				.and()
@@ -41,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/v1/admin/**")
 				.access("hasRole('ROLE_ADMIN')")
 				.anyRequest().permitAll();
+
 	}
 }
 

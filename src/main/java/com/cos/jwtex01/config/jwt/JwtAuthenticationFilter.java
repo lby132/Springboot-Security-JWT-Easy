@@ -75,12 +75,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		// Tip: 인증 프로바이더의 디폴트 서비스는 UserDetailsService 타입
 		// Tip: 인증 프로바이더의 디폴트 암호화 방식은 BCryptPasswordEncoder
 		// 결론은 인증 프로바이더에게 알려줄 필요가 없음.
+		// PrincipalDetailsService의 loadUserByUsername() 함수가 호출됨
 		Authentication authentication =
 				authenticationManager.authenticate(authenticationToken);
 
 		// authentication 객체가 session 영역에 저장됨. => 로그인이 되었다는 뜻.
 		PrincipalDetails principalDetailis = (PrincipalDetails) authentication.getPrincipal();
-		System.out.println("Authentication : "+principalDetailis.getUser().getUsername()); //로그인이 정상적으로 됨
+		System.out.println("Authentication : "+principalDetailis.getUser().getUsername()); // 출력이 되면 로그인이 정상적으로 됐다는 것.
 		// authentication 객체가 session영역에 저장을 해야하고 그 방법이 return 해주면 됨.
 		// 리턴의 이유는 권한 관리를 security가 대신 해주기 때문에 편하려고 하는거임.
 		// 굳이 JWT토큰을 사용하면서 세션을 만들 이유가 없음. 근데 단지 권한 처리 때문에 session을 넣어준다.

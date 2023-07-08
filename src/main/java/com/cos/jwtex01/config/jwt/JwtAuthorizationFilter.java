@@ -20,7 +20,7 @@ import com.cos.jwtex01.model.User;
 import com.cos.jwtex01.repository.UserRepository;
 
 // 시큐리티가 filter를 가지고 있는데 그 필터중에 BasicAuthenticationFilter 라는 것이 있음.
-// 권한이나 인증이 필요한 특정 주소를 요청했을 때 이 필터를 무조건 타게 되어있음.
+// 권한이나 인증이 필요한 특정 주소를 요청했을 때 이 필터를 무조건 타게 되어있음. SecurityConfig 에 필터 걸어줘야함.
 // 만약에 권한이 인증이 필요한 주소가 아니라면 이 필터를 타지 않는다.
 // 인가
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
